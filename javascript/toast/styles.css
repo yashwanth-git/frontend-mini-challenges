@@ -6,3 +6,32 @@
   padding: 0;
   font-family: "Poppins", sans-serif;
 }
+.toast {
+  padding: 0.75em;
+  border: 1px solid #000;
+  border-radius: 0.25em;
+  width: 280px;
+  position: relative;
+}
+.toast::after {
+  content: "\00D7";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+.toast-container {
+  position: fixed;
+  margin: 10px;
+}
+.toast-container[data-position^="top-"] {
+  top: 0;
+}
+.toast-container[data-position^="bottom-"] {
+  bottom: 0;
+}
+.toast-container[data-position$="-right"] {
+  right: 0;
+}
+.toast-container[data-position$="-left"] {
+  left: 0;
+}
