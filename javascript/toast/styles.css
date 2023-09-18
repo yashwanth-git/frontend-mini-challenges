@@ -22,6 +22,9 @@
 .toast-container {
   position: fixed;
   margin: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }
 .toast-container[data-position^="top-"] {
   top: 0;
