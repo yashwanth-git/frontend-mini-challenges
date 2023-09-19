@@ -4,20 +4,20 @@ export default class Toast {
   #position;
   #autoCloseInterval;
   #text;
+  #toastEl;
   constructor(options) {
     this.#position = options?.position ?? "top-right";
     this.#autoCloseInterval = options?.autoCloseInterval ?? 2000;
     this.#text = options?.text ?? "This is a sample text";
-    this.init();
-  }
-  init() {
-    const toast = createEl("div", {
+    this.#toastEl = createEl("div", {
       class: "toast",
       role: "alert",
       "aria-label": this.#text,
     });
-    toast.textContent = this.#text;
-
+    this.#toastEl.textContent = this.#text;
+    this.init();
+  }
+  init() {
     const selector = `.toast-container[data-position="${this.position}"]`;
     const container =
       getEl(selector) ||
@@ -27,9 +27,11 @@ export default class Toast {
       });
 
     getEl("body").append(container);
-    getEl(".toast-container").append(toast);
+    getEl(".toast-container").append(this.#toastEl);
   }
-  remove() {}
+  remove() {
+    this.#toastEl.remove();
+  }
 }
 
 const toast = new Toast({
@@ -37,4 +39,6 @@ const toast = new Toast({
   text: "Hi! Welcome to your toast",
 });
 
-console.log(toast);
+setTimeout(() => {
+  toast.remove();
+}, 1000);
