@@ -52,9 +52,3 @@ export default class Toast {
     container.remove();
   }
 }
-
-const toast = new Toast({
-  position: "top-right",
-  text: "Hi! Welcome to your toast",
-  autoClose: false,
-});
