@@ -20,7 +20,7 @@ export default class Toast {
     this.init();
   }
   init() {
-    const selector = `.toast-container[data-position="${this.position}"]`;
+    const selector = `.toast-container[data-position="${this.#position}"]`;
     const container =
       getEl(selector) ||
       createEl("div", {
@@ -29,7 +29,7 @@ export default class Toast {
       });
 
     getEl("body").append(container);
-    getEl(".toast-container").append(this.#toastEl);
+    getEl(selector).append(this.#toastEl);
 
     if (this.#autoClose) {
       setTimeout(() => {
@@ -45,3 +45,11 @@ export default class Toast {
     container.remove();
   }
 }
+
+const toast = new Toast({
+    position: "top-right",
+    text: "Hi! Welcome to your toast",
+    autoClose: true,
+    autoCloseInterval: 5000,
+  });
+  
