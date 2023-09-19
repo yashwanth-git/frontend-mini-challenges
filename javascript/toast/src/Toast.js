@@ -4,6 +4,7 @@ export default class Toast {
   #position;
   #autoClose;
   #autoCloseInterval;
+  #autoCloseId;
   #text;
   #toastEl;
   constructor(options) {
@@ -31,10 +32,16 @@ export default class Toast {
     getEl("body").append(container);
     getEl(selector).append(this.#toastEl);
 
-    if (this.#autoClose) {
-      setTimeout(() => {
+    if (this.#autoClose) { // To autoclose the toast
+      if (this.#autoCloseId != null) clearTimeout(this.#autoCloseId);
+      this.#autoCloseId = setTimeout(
+        () => this.remove(),
+        this.#autoCloseInterval
+      );
+    } else { // Manual close the toast
+      this.#toastEl.addEventListener("click", () => {
         this.remove();
-      }, this.#autoCloseInterval);
+      });
     }
   }
   remove() {
@@ -47,9 +54,7 @@ export default class Toast {
 }
 
 const toast = new Toast({
-    position: "top-right",
-    text: "Hi! Welcome to your toast",
-    autoClose: true,
-    autoCloseInterval: 5000,
-  });
-  
+  position: "top-right",
+  text: "Hi! Welcome to your toast",
+  autoClose: false,
+});
