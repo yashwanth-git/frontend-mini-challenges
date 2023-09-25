@@ -6,6 +6,20 @@
   padding: 0;
   font-family: "Poppins", sans-serif;
 }
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.btn {
+  font-size: 1.0625rem;
+  padding: 1em 1.125em;
+  background-color: #fff;
+  border: 2px solid #0755a8;
+  border-radius: 5px;
+  cursor: pointer;
+}
 .toast {
   padding: 0.75em;
   border: 1px solid #000;
@@ -13,16 +27,26 @@
   width: 280px;
   position: relative;
   cursor: pointer;
+  overflow: hidden;
   transition: transform 200ms ease-in-out;
 }
 .toast-container[data-position$="-right"] .toast {
   transform: translateX(110%);
 }
-.toast-container[data-position$="-left"] .toast{
-  transform: translateY(110%);
+.toast-container[data-position$="-left"] .toast {
+  transform: translateX(-110%);
 }
 .toast-container .toast.show {
   transform: translate(0, 0);
+}
+.toast.progress::before {
+  content: "";
+  position: absolute;
+  height: 3px;
+  width: calc(100% * var(--progress));
+  background-color: #0755a8;
+  left:0;
+  bottom: 0;
 }
 .toast::after {
   content: "\00D7";

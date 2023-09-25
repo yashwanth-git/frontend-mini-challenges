@@ -7,11 +7,13 @@ export default class Toast {
   #autoCloseId;
   #text;
   #toastEl;
+  #showProgress;
   constructor(options) {
     this.#position = options?.position ?? "top-right";
     this.#autoCloseInterval = options?.autoCloseInterval ?? 2000;
     this.#text = options?.text ?? "This is a sample text";
     this.#autoClose = options?.autoClose ?? false;
+    this.#showProgress = options?.showProgress ?? false;
     this.#toastEl = createEl("div", {
       class: "toast",
       role: "alert",
@@ -19,6 +21,7 @@ export default class Toast {
     });
     requestAnimationFrame(() => {
       this.#toastEl.classList.add("show");
+      this.#toastEl.classList.add("progress");
     });
     this.#toastEl.textContent = this.#text;
     this.init();
