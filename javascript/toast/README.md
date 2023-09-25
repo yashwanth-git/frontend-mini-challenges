@@ -6,9 +6,9 @@ This is a simple toast component built using vanilla js.
 
 
 ## Learnings
-[x] - Module Imports
-[x] - Class Approach
-[x] - Private Variables
+- [x] Module Imports
+- [x] Class Approach
+- [x] Private Variables
 
 ## Future
 - Create components using class based approach
