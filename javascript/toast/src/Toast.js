@@ -17,6 +17,9 @@ export default class Toast {
       role: "alert",
       "aria-label": this.#text,
     });
+    requestAnimationFrame(() => {
+      this.#toastEl.classList.add("show");
+    });
     this.#toastEl.textContent = this.#text;
     this.init();
   }
@@ -32,13 +35,15 @@ export default class Toast {
     getEl("body").append(container);
     getEl(selector).append(this.#toastEl);
 
-    if (this.#autoClose) { // To autoclose the toast
+    if (this.#autoClose) {
+      // To autoclose the toast
       if (this.#autoCloseId != null) clearTimeout(this.#autoCloseId);
       this.#autoCloseId = setTimeout(
         () => this.remove(),
         this.#autoCloseInterval
       );
-    } else { // Manual close the toast
+    } else {
+      // Manual close the toast
       this.#toastEl.addEventListener("click", () => {
         this.remove();
       });
@@ -46,9 +51,12 @@ export default class Toast {
   }
   remove() {
     const container = this.#toastEl.parentElement;
-    this.#toastEl.remove();
-    if (container.hasChildNodes()) return;
+    this.#toastEl.classList.remove("show");
+    this.#toastEl.addEventListener("transitionend", () => {
+      this.#toastEl.remove();
+      if (container.hasChildNodes()) return;
 
-    container.remove();
+      container.remove();
+    });
   }
 }

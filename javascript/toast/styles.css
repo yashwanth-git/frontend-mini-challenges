@@ -13,6 +13,16 @@
   width: 280px;
   position: relative;
   cursor: pointer;
+  transition: transform 200ms ease-in-out;
+}
+.toast-container[data-position$="-right"] .toast {
+  transform: translateX(110%);
+}
+.toast-container[data-position$="-left"] .toast{
+  transform: translateY(110%);
+}
+.toast-container .toast.show {
+  transform: translate(0, 0);
 }
 .toast::after {
   content: "\00D7";
