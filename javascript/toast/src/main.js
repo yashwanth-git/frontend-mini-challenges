@@ -4,7 +4,8 @@ document.querySelector("button").addEventListener("click", () => {
   new Toast({
     text: "Hi! Welcome to your toast",
     position: "top-left",
-    autoClose: false,
-    autoCloseInterval: 4000,
+    autoClose: true,
+    autoCloseInterval: 5000,
+    showProgress: true
   });
 });
